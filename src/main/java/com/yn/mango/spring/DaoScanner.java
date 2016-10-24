@@ -1,10 +1,14 @@
 package com.yn.mango.spring;
 
 import com.yn.mango.annotation.DAO;
+import com.yn.mango.dao.UserDAO;
 import com.yn.mango.util.L;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -29,14 +33,31 @@ public class DaoScanner implements BeanFactoryPostProcessor {
     /* 扫描的包 */
     private List<String> packages;
 
+    /*扫描的路径*/
     private List<String> locations;
+
+    private Class<?> factoryBeanClass = DefaultMangoFactoryBean.class;
+
+    /* 懒加载 */
+    private boolean lazyInit = false;
 
     private String[] DAO_ENDS = {"DAO", "Dao"};
 
-
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) throws BeansException {
         List<Class<?>> daoClasses = findDaoClasses();
-        System.out.println(Arrays.toString(daoClasses.toArray()));
+        DefaultListableBeanFactory dlbf = (DefaultListableBeanFactory) configurableListableBeanFactory;
+        for (Class<?> daoClass : daoClasses) {
+            GenericBeanDefinition bf = new GenericBeanDefinition();
+            bf.setBeanClassName(daoClass.getName());
+            MutablePropertyValues pvs = bf.getPropertyValues();
+            pvs.addPropertyValue("daoClass", daoClass);
+
+            bf.setBeanClass(factoryBeanClass);
+            bf.setPropertyValues(pvs);
+            bf.setLazyInit(lazyInit);
+            dlbf.registerBeanDefinition(daoClass.getName(), bf);
+        }
+
     }
 
     private List<Class<?>> findDaoClasses() {
@@ -47,14 +68,12 @@ public class DaoScanner implements BeanFactoryPostProcessor {
             ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
             MetadataReaderFactory metadataReaderFactory = new CachingMetadataReaderFactory(resourcePatternResolver);
             for (String location : locations) {
-                L.info(location);
                 Resource[] resources = resourcePatternResolver.getResources(location);
                 for (Resource r : resources) {
                     MetadataReader reader = metadataReaderFactory.getMetadataReader(r);
                     AnnotationMetadata metadata = reader.getAnnotationMetadata();
                     if (metadata.hasAnnotation(DAO.class.getName())) {
                         ClassMetadata m = reader.getClassMetadata();
-                        L.info(m.getClassName());
                         daoClasses.add(Class.forName(m.getClassName()));
                     }
                 }
@@ -74,5 +93,13 @@ public class DaoScanner implements BeanFactoryPostProcessor {
                 locations.add(location);
             }
         }
+    }
+
+    public void setLazyInit(boolean lazyInit) {
+        this.lazyInit = lazyInit;
+    }
+
+    public void setFactoryBeanClass(Class<?> factoryBeanClass) {
+        this.factoryBeanClass = factoryBeanClass;
     }
 }
