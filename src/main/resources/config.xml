@@ -1,0 +1,23 @@
+<config>
+    <testEnvCofig>
+        <fullfilSystem username="1" userpassword="1p">
+            <url>htpp://www.baidu.com</url>
+            <databasename>products_center_v1</databasename>
+        </fullfilSystem>
+        <procurementSystem username="2" userpassword="2p">>
+            <url>http://172.16.0.161:8080/v3center/login1.jsp</url>
+            <databasename>products_center_v1</databasename>
+        </procurementSystem>
+    </testEnvCofig>
+
+    <testEnvCofig>
+        <fullfilSystem username="3" userpassword="3p">
+            <url>htpp://www.baidu.com</url>
+            <databasename>products_center_v1</databasename>
+        </fullfilSystem>
+        <procurementSystem username="4" userpassword="4p">>
+            <url>http://172.16.0.161:8080/v3center/login1.jsp</url>
+            <databasename>products_center_v1</databasename>
+        </procurementSystem>
+    </testEnvCofig>
+</config>
