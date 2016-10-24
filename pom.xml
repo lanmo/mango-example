@@ -10,7 +10,7 @@
 
   <properties>
     <junit.version>4.11</junit.version>
-    <spring.framework.version>4.2.0.RELEASE</spring.framework.version>
+    <spring.framework.version>4.0.5.RELEASE</spring.framework.version>
     <logback.version>1.0.13</logback.version>
   </properties>
 

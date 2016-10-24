@@ -11,4 +11,5 @@ import com.yn.mango.annotation.DAO;
         table = "user"
 )
 public interface UserDAO {
+    int select();
 }
