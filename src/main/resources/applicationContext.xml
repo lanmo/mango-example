@@ -7,6 +7,8 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
+
+
     <context:component-scan base-package="com.yn.mango.dao" />
     <bean class="com.yn.mango.spring.DaoScanner">
         <property name="packages">
@@ -17,6 +19,6 @@
     </bean>
 
     <!-- 初始化 -->
-    <bean id="mango" class="com.yn.mango.operator.Mango" init-method="newInstance"></bean>
+    <bean id="mango" class="com.yn.mango.operator.Mango" factory-method="newInstance"></bean>
 
 </beans>
