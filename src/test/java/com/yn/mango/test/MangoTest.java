@@ -16,18 +16,21 @@ import javax.annotation.Resource;
  * Created by yangnan on 16/10/22.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class MangoTest {
 
     @Resource
     private ApplicationContext context;
-
     @Resource
     private UserDAO userDAO;
 
+
     @Test
     public void test() {
+        String str = "11111";
+        L.info(Integer.parseInt(str, 2));
+        L.info("0111110000000".length());
         int a = userDAO.select();
-        L.info("a", a);
+        L.info("eeee", a);
     }
 }
