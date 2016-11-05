@@ -7,6 +7,8 @@ import javax.sql.DataSource;
  * 数据工厂
  */
 public interface DataSourceFactory {
+
     DataSource getMasterDataSource(String dataBase);
     DataSource getSlaveDataSource(String dataBase);
+
 }

@@ -47,6 +47,9 @@ public abstract class TypeVisitor {
         }
     }
 
+    public void visitClass(Class<?> t) {
+    }
+
     public void visitGenericArrayType(GenericArrayType type) {
     }
 

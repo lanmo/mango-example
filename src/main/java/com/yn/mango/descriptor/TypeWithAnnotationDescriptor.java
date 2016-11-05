@@ -1,9 +1,10 @@
 package com.yn.mango.descriptor;
 
+import com.yn.mango.util.reflect.TypeWrapper;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.List;
-import javax.annotation.Nullable;
 
 /**
  * Created by yangnan on 16/10/26.
@@ -21,14 +22,13 @@ public abstract class TypeWithAnnotationDescriptor {
         this.type = type;
         this.rawType = null;
         this.annotations = annotations;
-        this.typeWrapper = new TypeWrapper();
+        this.typeWrapper = new TypeWrapper(type);
     }
 
     public boolean isAnnotationPresent(Class<? extends Annotation> annotationType) {
         return getAnnotation(annotationType) == null;
     }
 
-    @Nullable
     public <A extends Annotation> A getAnnotation(Class<A> annotationType) {
         for (Annotation annotation : getAnnotations()) {
             if (annotationType.isInstance(annotation)) {

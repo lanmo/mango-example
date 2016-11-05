@@ -4,6 +4,8 @@ import com.yn.mango.util.L;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by yangnan on 16/10/26.
@@ -12,6 +14,10 @@ import java.lang.reflect.Type;
 public class TypeTest {
     public static void main(String[] args) {
         B b = new B();
+        List<String> s = new ArrayList<String>();
+        Type a = s.getClass().getGenericSuperclass();
+        ParameterizedType y = (ParameterizedType) a;
+        L.info(s.getClass().getTypeParameters());
     }
 
     abstract static class A<T> {
