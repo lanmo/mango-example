@@ -1,8 +1,6 @@
 package com.yn.mango.spring;
 
-import com.yn.mango.annotation.DAO;
-import com.yn.mango.dao.UserDAO;
-import com.yn.mango.util.L;
+import com.yn.mango.annotation.DB;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -18,9 +16,7 @@ import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -72,7 +68,7 @@ public class DaoScanner implements BeanFactoryPostProcessor {
                 for (Resource r : resources) {
                     MetadataReader reader = metadataReaderFactory.getMetadataReader(r);
                     AnnotationMetadata metadata = reader.getAnnotationMetadata();
-                    if (metadata.hasAnnotation(DAO.class.getName())) {
+                    if (metadata.hasAnnotation(DB.class.getName())) {
                         ClassMetadata m = reader.getClassMetadata();
                         daoClasses.add(Class.forName(m.getClassName()));
                     }

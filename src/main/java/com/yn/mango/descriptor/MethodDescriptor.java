@@ -48,4 +48,8 @@ public class MethodDescriptor {
     public List<ParameterDescriptor> getParameterDescriptors() {
         return parameterDescriptors;
     }
+
+    public ReturnDescriptor getReturnDescriptor() {
+        return returnDescriptor;
+    }
 }

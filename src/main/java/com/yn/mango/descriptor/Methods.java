@@ -16,7 +16,7 @@ public class Methods {
         for (Annotation annotation : method.getAnnotations()) {
             ans.add(annotation);
         }
-        for (Annotation annotation : method.getDeclaredAnnotations()) {
+        for (Annotation annotation : method.getDeclaringClass().getAnnotations()) {
             ans.add(annotation);
         }
 

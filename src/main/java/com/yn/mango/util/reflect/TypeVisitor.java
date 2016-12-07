@@ -31,7 +31,7 @@ public abstract class TypeVisitor {
                 } else if (type instanceof ParameterizedType) {
                     visitParameterizedType((ParameterizedType)type);
                 } else if (type instanceof Class<?>) {
-                    visitClassType((Class<?>)type);
+                    visitClass((Class<?>)type);
                 } else if (type instanceof GenericArrayType) {
                     visitGenericArrayType((GenericArrayType)type);
                 } else {
@@ -51,9 +51,6 @@ public abstract class TypeVisitor {
     }
 
     public void visitGenericArrayType(GenericArrayType type) {
-    }
-
-    public void visitClassType(Class<?> type) {
     }
 
     public void visitParameterizedType(ParameterizedType type) {

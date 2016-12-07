@@ -9,16 +9,36 @@
 
 
 
-    <context:component-scan base-package="com.yn.mango.dao" />
+    <context:component-scan base-package="com.yn.mango.test.dao" />
     <bean class="com.yn.mango.spring.DaoScanner">
         <property name="packages">
             <list>
-                <value>com.yn.mango.dao</value>
+                <value>com.yn.mango.test.dao</value>
             </list>
         </property>
     </bean>
 
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg index="0">
+            <bean class="com.zaxxer.hikari.HikariConfig">
+                <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+                <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/geo"/>
+                <property name="username" value="root"/>
+                <property name="password" value="yangnan"/>
+                <property name="maximumPoolSize" value="10"/>
+                <property name="connectionTimeout" value="3000"/>
+                <property name="autoCommit" value="true"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
     <!-- 初始化 -->
-    <bean id="mango" class="com.yn.mango.operator.Mango" factory-method="newInstance"></bean>
+    <bean id="mango" class="com.yn.mango.operator.Mango" factory-method="newInstance">
+        <property name="dataSourceFactory" >
+            <bean class="com.yn.mango.datasource.SimpleDataSourceFactory">
+                <constructor-arg ref="dataSource"/>
+            </bean>
+        </property>
+    </bean>
 
 </beans>

@@ -90,4 +90,8 @@ public abstract class TypeWithAnnotationDescriptor {
         return isSet() || isHashSet();
     }
 
+    public Class<?> getMappedClass() {
+        return typeWrapper.getMappedClass();
+    }
+
 }

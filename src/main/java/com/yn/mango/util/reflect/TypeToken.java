@@ -56,7 +56,7 @@ public abstract class TypeToken<T> extends TypeCapture<T> implements Serializabl
             }
 
             @Override
-            public void visitClassType(Class<?> t) {
+            public void visitClass(Class<?> t) {
                 types.add(t);
             }
 

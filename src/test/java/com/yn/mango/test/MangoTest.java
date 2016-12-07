@@ -1,11 +1,10 @@
 package com.yn.mango.test;
 
-import com.yn.mango.dao.UserDAO;
-import com.yn.mango.operator.Mango;
+import com.yn.mango.test.dao.UserDAO;
+import com.yn.mango.test.pojo.GeoBlockOrder;
 import com.yn.mango.util.L;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -30,7 +29,7 @@ public class MangoTest {
         String str = "11111";
         L.info(Integer.parseInt(str, 2));
         L.info("0111110000000".length());
-        int a = userDAO.select();
+        GeoBlockOrder a = userDAO.select(1);
         L.info("eeee", a);
     }
 }
