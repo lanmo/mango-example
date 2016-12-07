@@ -29,7 +29,7 @@ public class MangoTest {
         String str = "11111";
         L.info(Integer.parseInt(str, 2));
         L.info("0111110000000".length());
-        GeoBlockOrder a = userDAO.select(1);
+        GeoBlockOrder a = userDAO.select(2);
         L.info("eeee", a);
     }
 }

@@ -14,18 +14,16 @@ public class ResultSetWrapper {
     private final ResultSet resultSet;
 
     private final List<String> columnNames = new ArrayList<String>();
-    private List<Object> columnValues = new ArrayList<Object>();
     public ResultSetWrapper(ResultSet resultSet) throws SQLException {
         this.resultSet = resultSet;
         ResultSetMetaData metaData = resultSet.getMetaData();
         int columnCount = metaData.getColumnCount();
-        for (int i=0; i<columnCount; i++) {
+        for (int i=1; i<=columnCount; i++) {
             String columnName = metaData.getColumnLabel(i);
             if (columnName == null || columnName.length() < 1) {
                 columnName = metaData.getColumnName(i);
             }
             columnNames.add(columnName);
-            columnValues.add(resultSet.getObject(i));
         }
     }
 
@@ -37,11 +35,4 @@ public class ResultSetWrapper {
         return columnNames;
     }
 
-    public List<Object> getColumnValues() {
-        return columnValues;
-    }
-
-    public void setColumnValues(List<Object> columnValues) {
-        this.columnValues = columnValues;
-    }
 }

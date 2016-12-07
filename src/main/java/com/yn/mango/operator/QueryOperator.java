@@ -59,6 +59,8 @@ public class QueryOperator extends AbstractOperator {
 
     public Object execute(Object[] values) {
         InvocationContext context = invocationContextFactory.newInvocationContext(values);
+
+        context.writeToSqlBuffer(getNodeInfo().getExeSql());
         return execute(context);
     }
 
@@ -92,7 +94,7 @@ public class QueryOperator extends AbstractOperator {
             Object visitForObject() {
                 return jdbcOptions.queryForObject(ds, sql, rowMapper);
             }
-        };
+        }.visit();
 
         return r;
     }

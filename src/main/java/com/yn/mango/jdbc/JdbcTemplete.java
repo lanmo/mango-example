@@ -63,7 +63,7 @@ public class JdbcTemplete implements JdbcOptions {
     private void setValues(PreparedStatement ps, BoundSql boundSql) throws SQLException {
         List<Object> args = boundSql.getArgs();
         for (int i=0; i<args.size(); i++) {
-            ps.setObject(i, args.get(i));
+            ps.setObject(i+1, args.get(i));
         }
     }
 }
